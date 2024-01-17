@@ -11,14 +11,15 @@ class Airplane:
         :param seat: сколько мест в самолете
         :param passenger: поссажиры
         Примеры:
-        #>>> airplane = Airplane(500, 0)  # инициализация экземпляра класса
+        >>> airplane = Airplane(500, 0)  # инициализация экземпляра класса
+
         """
         self.seat = None
         self.init_seat(seat)
         self.passenger = None
         self.init_passenger(passenger)
-        self.free_seat = 0
-    def init_seat(self,seat:int):
+
+    def init_seat(self, seat: int):
         if not isinstance(seat, int):
             raise TypeError('Должен быть классом  int')
         if seat < 0:
@@ -37,22 +38,13 @@ class Airplane:
         """
         Метод увеличивает занятое место
         :param occupied_seat: Количество занятых мест
+
         """
         if not isinstance(passenger, int):
             raise TypeError('Должен быть классом  int')
         if passenger < 0:
             raise ValueError('Не может быть отрицательным')
-        self.free_seat += passenger
-
-
-
-
-if __name__ == "__main__":
-    airplane = Airplane(550, 400)    #  работоспособность экземпляров класса проверить с помощью doctest
-    airplane.increment_passenger(2)
-    print(airplane.seat)
-    print(airplane.passenger)
-    print(airplane.free_seat)
+        self.passenger += passenger
 
 
 class PhoneBook:
@@ -77,13 +69,9 @@ class PhoneBook:
         self.phone = phone
 
     def append(self, name, phone):
-        #with open('file.txt', 'a') as file_object:
-        #file_object.write(name,phone)
-            pass
+        with open('file.txt', 'a') as file_object:
+            file_object.write(f'name = {name:20}, phone = {phone:20}\n')
 
-
-if __name__ == "__main__":
-    pass
 
 class Cube:
     """
@@ -106,7 +94,7 @@ class Cube:
         self.length = length
 
     def init_width(self, width: Union[float, int]):
-        if not isinstance(width, (float,int)):
+        if not isinstance(width, (float, int)):
             raise TypeError('Должен быть тип int')
         if width < 0:
             raise ValueError('Не может быть отрицательным')
@@ -127,11 +115,21 @@ class Cube:
         return volume
 
 if __name__ == "__main__":
+    airplane = Airplane(550, 400)  # работоспособность экземпляров класса проверить с помощью doctest
+    airplane.increment_passenger(1)
+    print(airplane.seat)
+    print(airplane.passenger)
+
+    phonebook = PhoneBook('Денис', 89602657176)
+    print(phonebook.name)
+    print(phonebook.phone)
+
     cube = Cube(1, 2, 3)
     print(cube.height)
     print(cube.length)
     print(cube.width)
     print(cube.calculate_volume(1.2, 2, 3))
-    #help(cube)
-    doctest.testmod()
+    help(cube)
+    import doctest
+    #doctest.testmod()
 
